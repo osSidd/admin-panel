@@ -1,7 +1,9 @@
+import { Box, Typography } from "@mui/material";
+
 export default function Dashboard(){
     return (
-        <div>
-            <h1>Dashboard</h1>
-        </div>
+        <Box>
+            <Typography component='h2' variant="h6">Dashboard</Typography>
+        </Box>
     )
 }

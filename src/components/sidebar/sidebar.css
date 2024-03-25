@@ -4,8 +4,6 @@
     font-size: large;
     font-family: Roboto;
     color: #555;
-    padding: 1rem 2rem;
-    border-radius: 8px;
 }
 
 .nav-link+.nav-link{
@@ -13,6 +11,6 @@
 }
 
 .active{
-    background-color: #234;
-    color: #fefefe;
+    font-weight: 700;
+    color: #42e;
 }
