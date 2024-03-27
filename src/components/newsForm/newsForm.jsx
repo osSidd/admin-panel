@@ -133,7 +133,7 @@ export default function NewsForm({feed}){
                         width={375}
                         bgcolor='white'
                     />
-                    <Box position='absolute' top={75} left={50}>
+                    <Box position='absolute' top={75}>
                         <Feed mobile={true} feed={mobileFeed}/>    
                     </Box>
                     <CloseIcon onClick={() => setDisplayMobile(false)} sx={{fontSize:32, position:'absolute', bottom:70, right:180, cursor:'pointer'}}/>

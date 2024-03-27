@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css'
 
@@ -20,13 +20,19 @@ import AdminBar from './components/adminbar/adminBar';
 
 function App() {
 
+  const [toggleSideBar, setToggleSideBar] = useState(false)
+
+  function displaySideBar(state){
+    setToggleSideBar(state)
+  }
+
   return (
   <>
     <Box minHeight='100vh' position='relative' bgcolor='#f4f4f5'>
-      <SideBar/>
-        <Box width='78%' ml='auto' py={4}>
+      <SideBar toggleSideBar={toggleSideBar} displaySideBar={displaySideBar}/>
+        <Box width={{xs:'100%', lg:'78%'}} ml='auto' py={4}>
         <Box px={4}>
-          <AdminBar/>
+          <AdminBar toggleSideBar={toggleSideBar} displaySideBar={displaySideBar}/>
           <Suspense fallback={<div>Loading...</div>}>
             <Routes>
               <Route path='/' element={<Dashboard/>}/>
