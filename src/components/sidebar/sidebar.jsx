@@ -9,24 +9,31 @@ import SpeedIcon from '@mui/icons-material/Speed';
 
 export default function SideBar(){
     return (
-        <Box borderRight={1} borderColor='#aaa' width='20%' pl={2} pb={2} position='fixed' top='2rem'>
-            <Typography component='h1' variant="h5" fontWeight={700} color='#222'>Admin panel</Typography>
-            <Box mt={8}>
+        <Box width={265} height='100%' pl={2} pb={2} position='fixed' top={0} left={0} bgcolor='white'>
+            <Typography component='h1' fontSize={28} fontWeight={600} color='panelPrimary.main' mt={2}>News2Day</Typography>
+            <Box mt={24}>
                 <Box display='flex'>
-                    <DashboardIcon/>
-                    <NavLink className='nav-link' to='/'>Dashboard</NavLink>
+                    <NavLink className='nav-link' to='/'>
+                        <DashboardIcon sx={{mr:2}}/>
+                        <span>Dashboard</span></NavLink>
                 </Box>
                 <Box display='flex' mt={2}>
-                    <CreateIcon/>
-                    <NavLink className='nav-link' to='/news-feed/create'>Create news feed</NavLink>
+                    <NavLink className='nav-link' to='/news-feed/create'>
+                        <CreateIcon sx={{mr:2}}/>
+                        <span>Create news feed</span>
+                    </NavLink>
                 </Box>
                 <Box display='flex' mt={2}>
-                    <EqualizerIcon/>
-                    <NavLink className='nav-link' to='/news-feed/manage'>Manage news feeds</NavLink>
+                    <NavLink className='nav-link' to='/news-feed/manage'>
+                        <EqualizerIcon sx={{mr:2}}/>
+                        <span>Manage news feeds</span>
+                    </NavLink>
                 </Box>
                 <Box display='flex' mt={2}>
-                    <SpeedIcon/>
-                    <NavLink className='nav-link' to='/performance'>Performance</NavLink>
+                    <NavLink className='nav-link' to='/performance'>
+                        <SpeedIcon sx={{mr:2}}/>
+                        <span>Performance</span>
+                    </NavLink>
                 </Box>
 
             </Box>

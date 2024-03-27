@@ -1,12 +1,18 @@
 .nav-link{
-    display: block;
+    width:80%;
+    display: flex;
+    align-items: center;
     text-decoration: none;
     font-size: large;
     font-family: Roboto;
-    color: #555;
-    margin-left: 8px;
+    color: #7a7a7a;
+    font-weight: 400;
+    margin-left: 2px;
+    padding: 8px 16px;
+    border-radius: 8px;
 }
 
-.active{
-    color: #42e;
+.active {
+    background-color: #7367f0;
+    color: white;
 }

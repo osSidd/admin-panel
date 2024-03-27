@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import {BrowserRouter} from 'react-router-dom'
 import FeedContextProvider from './context/feedContext.jsx'
+import Theme from './style/theme.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <FeedContextProvider>
-        <App/>
+        <Theme>
+          <App/>
+        </Theme>
       </FeedContextProvider>
     </BrowserRouter>
   </React.StrictMode>,

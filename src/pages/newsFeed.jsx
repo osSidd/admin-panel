@@ -1,20 +1,68 @@
-import { Box, Typography } from "@mui/material";
+// import ViewFeedPortal from '../components/portals/viewFeedPortal'
+import { Box, Button, Typography} from "@mui/material";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 import useFeedContext from "../hooks/useFeedContext";
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { useState } from "react";
+import Feed from "../components/feed";
+import CloseIcon from '@mui/icons-material/Close';
+import { useNavigate } from "react-router-dom";
+
 
 export default function ManageFeed(){
 
-    const {feed} = useFeedContext()
+    const {feed, dispatch} = useFeedContext()
+    const [viewFeed, setViewFeed] = useState({})
+    const navigate = useNavigate()
 
     return (
         <Box>
-            <Typography component='h2' variant="h2">Manage news feed</Typography>
-            {
-                feed.map(f => (
-                    <div key={f.id}>
-                        <p>{f.title}</p>
-                    </div>
-                ))
-            }
+            {feed.length ? <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                    <TableRow>
+                        <TableCell>Title</TableCell>
+                        <TableCell align="right">Category</TableCell>
+                        <TableCell align="right">Created At</TableCell>
+                        <TableCell align="right">Status</TableCell>
+                        <TableCell align="right">Action</TableCell>
+                    </TableRow>
+                    </TableHead>
+                    <TableBody>
+                    {feed.map((row) => (
+                        <TableRow
+                        key={row.id}
+                        sx={{ '&:last-child td, &:last-child th': { border: 0 }}}
+                        >
+                        <TableCell component="th" scope="row" width='40%'>
+                            {row.title}
+                        </TableCell>
+                        <TableCell align="right">{row.category}</TableCell>
+                        <TableCell align="right">{row.createdAt}</TableCell>
+                        <TableCell align="right">{row.status}</TableCell>
+                        <TableCell align="right">
+                            <VisibilityIcon onClick={() => setViewFeed(row)} color='info' sx={{fontSize:18, cursor:'pointer'}}/>
+                            <EditIcon onClick={() => {dispatch({type:'EDIT_FEED', payload:row.id}); navigate('/news-feed/edit')}} color='secondary' sx={{ml:1, fontSize:18, cursor:'pointer'}}/>
+                            <DeleteIcon onClick={() => {dispatch({type:'DELETE_FEED', payload:row.id})}} color='error' sx={{ml:1, fontSize:18, cursor:'pointer'}}/>
+                        </TableCell>
+                        </TableRow>
+                    ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>: <Typography>No feed</Typography>}
+            <Box display={`${'title' in viewFeed ? 'block': 'none'}`} position='fixed' top={25} right={75} left={75} bgcolor='white' boxShadow={24} borderRadius={2} p={4}>
+                <CloseIcon onClick={() => setViewFeed({})} sx={{ml:'auto', display:'block', cursor:'pointer'}}/>
+                <Feed feed={viewFeed}/>
+            </Box>
         </Box>
     )
 }
+

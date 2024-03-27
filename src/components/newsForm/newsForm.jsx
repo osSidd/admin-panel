@@ -1,23 +1,73 @@
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { useState, useRef } from "react";
+import useFeedContext from "../../hooks/useFeedContext";
+import { useNavigate } from "react-router-dom";
 
-export default function NewsForm({header}){
+export default function NewsForm({feed}){
 
-    const [category, setCategory] = useState('Politics') 
+    const {dispatch} = useFeedContext()
+    const navigate = useNavigate()
+
+    const contentRef = useRef()
+
+    const [feedForm, setFeedForm] = useState({
+        title: feed? feed.title : '',
+        category: feed ? feed.category : 'Politics',
+        multimedia: feed ? feed.multimedia : '',
+    })
+
+    function handleChange(e){
+        const {name, value} = e.target
+        setFeedForm(prev => ({
+            ...prev,
+            [name]: value
+        }))
+    }
+
+    function submitForm(id){
+        dispatch({
+            type: feed ? 'UPDATE_FEED' : 'ADD_FEED',
+            payload: feed ? 
+                {
+                    id: feed.id,
+                    feed: {
+                        ...feedForm,
+                        status: id,
+                        content: contentRef.current?.value,
+                        createdAt: new Date().toLocaleDateString()
+                    }
+                }
+            : {
+                ...feedForm,
+                status: id,
+                content: contentRef.current?.value,
+                createdAt: new Date().toLocaleDateString()
+            }
+        })
+        setFeedForm({
+            title: '',
+            category: 'Politics',
+            multimedia: '',
+        })
+        contentRef.current = ''
+        navigate('/news-feed/manage')
+    }
+
     return (
-        <>
-            <Box>
-                <Typography component='h2' variant="h2">{header}</Typography>
-                <Button variant='outlined' sx={{ml:'auto', display:'block'}}>Mobile preview</Button>
-            </Box>
+        <Box bgcolor='white' p={2} borderRadius={2} boxShadow={4}>
+
             <Box
                 component='form'
-                my={5}
+                my={2}
             >
+                {feed && <Typography mb={4} fontWeight={600}>{'Edit: feed id - ' + feed.id}</Typography>}
                 <TextField
                     variant='outlined'
                     label='News title'
                     fullWidth
+                    name="title"
+                    value={feedForm.title}
+                    onChange={handleChange}
                 />
                 <Box sx={{ minWidth: 120 }} mt={3}>
                 <FormControl fullWidth>
@@ -25,9 +75,10 @@ export default function NewsForm({header}){
                     <Select
                     labelId="select-label"
                     id="select"
-                    value={category}
+                    name="category"
+                    value={feedForm.category}
                     label="Category"
-                    onChange={e => setCategory(e.target.value)}
+                    onChange={handleChange}
                     >
                     <MenuItem value='Politics'>Politics</MenuItem>
                     <MenuItem value='Sports'>Sports</MenuItem>
@@ -46,13 +97,20 @@ export default function NewsForm({header}){
                 <TextField
                     variant='outlined'
                     label='News content'
+                    name='content'
                     fullWidth
                     multiline
                     rows={10}
                     sx={{mt:3}}
+                    inputRef={contentRef}
+                    defaultValue={feed ? feed.content : ''}
                 />
-                <Button color='secondary' variant='contained' sx={{mt:4}}>Publish feed</Button>
+                <Box display='flex' alignItems='center' mt={4}>
+                    <Button onClick={() => submitForm('Draft')} sx={{bgcolor:'burlywood'}} variant='contained'>Save draft</Button>
+                    <Button onClick={() => submitForm('Published')} color='panelPrimary' sx={{color:'white', ml:2}} variant='contained'>Publish feed</Button>
+                    <Button color='panelPrimary' sx={{ml:'auto'}}>Mobile preview</Button>
+                </Box>
             </Box>
-        </>
+        </Box>
     )
 }
