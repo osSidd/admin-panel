@@ -15,6 +15,7 @@ export default function NewsForm({feed}){
     const contentRef = useRef()
 
     const [displayMobile, setDisplayMobile] = useState(false)
+    const [error, setError] = useState({title: '', content: ''})
     const [feedForm, setFeedForm] = useState({
         title: feed? feed.title : '',
         category: feed ? feed.category : 'Politics',
@@ -29,7 +30,20 @@ export default function NewsForm({feed}){
         }))
     }
 
+    function hasError(){
+        if(!feedForm.title){
+            setError(prev => ({content: '', title: 'title required'}))
+            return true
+        }
+
+        else if(!contentRef.current.value){
+            setError(prev => ({content: 'content required', title: ''}))
+            return true
+        }
+    }
+
     function submitForm(id){
+        if(hasError()) return 
         dispatch({
             type: feed ? 'UPDATE_FEED' : 'ADD_FEED',
             payload: feed ? 
@@ -83,6 +97,7 @@ export default function NewsForm({feed}){
                     value={feedForm.title}
                     onChange={handleChange}
                 />
+                <Typography mt={1} color='error'>{error.title}</Typography>
                 <Box sx={{ minWidth: 120 }} mt={3}>
                 <FormControl fullWidth>
                     <InputLabel id="select-label">Category</InputLabel>
@@ -119,24 +134,25 @@ export default function NewsForm({feed}){
                     inputRef={contentRef}
                     defaultValue={feed ? feed.content : ''}
                 />
+                <Typography mt={1} color='error'>{error.content}</Typography>
                 <Box display='flex' alignItems='center' mt={4}>
                     <Button onClick={() => submitForm('Draft')} sx={{bgcolor:'burlywood'}} variant='contained'>Save draft</Button>
                     <Button onClick={() => submitForm('Published')} color='panelPrimary' sx={{color:'white', ml:2}} variant='contained'>Publish feed</Button>
                     <Button onClick={() => setDisplayMobile(true)} color='panelPrimary' sx={{ml:'auto'}}>Mobile preview</Button>
                 </Box>
             </Box>
-            <Box display={displayMobile ? 'block': 'none'} width='fit-content' position='absolute' top={25} right={125}>
+            <Box zIndex={5} display={displayMobile ? 'block': 'none'} width='fit-content' position='absolute' top={25} right={{xs:25, lg:125}}>
                 <Box position='relative'>
                     <Box
                         component='img'
                         src={phone}
-                        width={375}
+                        width={{xs:320, lg:375}}
                         bgcolor='white'
                     />
                     <Box position='absolute' top={75}>
                         <Feed mobile={true} feed={mobileFeed}/>    
                     </Box>
-                    <CloseIcon onClick={() => setDisplayMobile(false)} sx={{fontSize:32, position:'absolute', bottom:70, right:180, cursor:'pointer'}}/>
+                    <CloseIcon onClick={() => setDisplayMobile(false)} sx={{fontSize:32, position:'absolute', bottom:70, right:{xs:135, lg:100}, cursor:'pointer'}}/>
                 </Box>
             </Box>
         </Box>

@@ -58,7 +58,7 @@ export default function ManageFeed(){
                     </TableBody>
                 </Table>
             </TableContainer>: <Typography>No feed</Typography>}
-            <Box display={`${'title' in viewFeed ? 'block': 'none'}`} position='fixed' top={25} right={75} left={75} bgcolor='white' boxShadow={24} borderRadius={2} p={4}>
+            <Box zIndex={5} display={`${'title' in viewFeed ? 'block': 'none'}`} position='fixed' top={25} right={{xs: 25, lg: 75}} left={{xs:25, lg: 75}} bgcolor='white' boxShadow={24} borderRadius={2} p={4}>
                 <CloseIcon onClick={() => setViewFeed({})} sx={{ml:'auto', display:'block', cursor:'pointer'}}/>
                 <Feed feed={viewFeed}/>
             </Box>

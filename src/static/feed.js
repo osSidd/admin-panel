@@ -8,7 +8,8 @@ export default [
         author: '',
         createdAt: new Date().toLocaleDateString(),
         status:'Published',
-        comments: []
+        comments: [],
+        views:255,
     },
     {
         id: 1,
@@ -19,7 +20,8 @@ export default [
         author: '',
         createdAt: new Date().toLocaleDateString(),
         status:'Draft',
-        comments: []
+        comments: [],
+        views: 302,
     },
     {
         id: 2,
@@ -30,7 +32,8 @@ export default [
         author: '',
         createdAt: new Date().toLocaleDateString(),
         status:'Published',
-        comments: []
+        comments: [],
+        views: 29,
     },
     {
         id: 3,
@@ -41,7 +44,8 @@ export default [
         author: '',
         createdAt: new Date().toLocaleDateString(),
         status:'Draft',
-        comments: []
+        comments: [],
+        views: 2023,
     },
     {
         id: 4,
@@ -52,7 +56,8 @@ export default [
         author: '',
         createdAt: new Date().toLocaleDateString(),
         status:'Draft',
-        comments: []
+        comments: [],
+        views: 99,
     },
     {
         id: 5,
@@ -63,7 +68,8 @@ export default [
         author: '',
         createdAt: new Date().toLocaleDateString(),
         status:'Draft',
-        comments: []
+        comments: [],
+        views: 123,
     },
     {
         id: 6,
@@ -74,7 +80,8 @@ export default [
         author: '',
         createdAt: new Date().toLocaleDateString(),
         status:'Draft',
-        comments: []
+        comments: [],
+        views: 992,
     },
     {
         id: 7,
@@ -85,6 +92,7 @@ export default [
         author: '',
         createdAt: new Date().toLocaleDateString(),
         status:'Draft',
-        comments: []
+        comments: [],
+        views: 1023,
     }
 ]
