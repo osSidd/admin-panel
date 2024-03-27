@@ -2,6 +2,10 @@ import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typo
 import { useState, useRef } from "react";
 import useFeedContext from "../../hooks/useFeedContext";
 import { useNavigate } from "react-router-dom";
+import phone from '../../assets/phone.png'
+import Feed from "../../components/feed";
+import CloseIcon from '@mui/icons-material/Close';
+
 
 export default function NewsForm({feed}){
 
@@ -10,6 +14,7 @@ export default function NewsForm({feed}){
 
     const contentRef = useRef()
 
+    const [displayMobile, setDisplayMobile] = useState(false)
     const [feedForm, setFeedForm] = useState({
         title: feed? feed.title : '',
         category: feed ? feed.category : 'Politics',
@@ -51,6 +56,15 @@ export default function NewsForm({feed}){
         })
         contentRef.current = ''
         navigate('/news-feed/manage')
+    }
+
+    const mobileFeed = {
+        title : feed ? feed.title : feedForm.title,
+        category: feed ? feed.category : feedForm.category,
+        content: feed ? feed.content : contentRef.current?.value,
+        multimedia: feed ? feed.multimedia : feedForm.multimedia,
+        status: feed ? feed.status : 'Draft',
+        createdAt: feed ? feed.createdAt : new Date().toLocaleDateString()
     }
 
     return (
@@ -108,7 +122,21 @@ export default function NewsForm({feed}){
                 <Box display='flex' alignItems='center' mt={4}>
                     <Button onClick={() => submitForm('Draft')} sx={{bgcolor:'burlywood'}} variant='contained'>Save draft</Button>
                     <Button onClick={() => submitForm('Published')} color='panelPrimary' sx={{color:'white', ml:2}} variant='contained'>Publish feed</Button>
-                    <Button color='panelPrimary' sx={{ml:'auto'}}>Mobile preview</Button>
+                    <Button onClick={() => setDisplayMobile(true)} color='panelPrimary' sx={{ml:'auto'}}>Mobile preview</Button>
+                </Box>
+            </Box>
+            <Box display={displayMobile ? 'block': 'none'} width='fit-content' position='absolute' top={25} right={125}>
+                <Box position='relative'>
+                    <Box
+                        component='img'
+                        src={phone}
+                        width={375}
+                        bgcolor='white'
+                    />
+                    <Box position='absolute' top={75} left={50}>
+                        <Feed mobile={true} feed={mobileFeed}/>    
+                    </Box>
+                    <CloseIcon onClick={() => setDisplayMobile(false)} sx={{fontSize:32, position:'absolute', bottom:70, right:180, cursor:'pointer'}}/>
                 </Box>
             </Box>
         </Box>
