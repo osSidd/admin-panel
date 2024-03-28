@@ -1,8 +1,8 @@
-import { Box, Paper, Typography } from '@mui/material'
+import { Box, Button, Paper, Typography } from '@mui/material'
 import * as d3 from 'd3'
 import { useEffect, useRef } from "react"
 
-export default function Graph({feed, category, field, title, graphColor, lineGraph=false}){
+export default function Graph({feed, category, field, title, graphColor, lineGraph=false, toggleVariation=undefined}){
     const svgRef = useRef()
 
     function makeGraph(svgRef, feed, category, field){
@@ -14,6 +14,8 @@ export default function Graph({feed, category, field, title, graphColor, lineGra
         svg
             .attr('height', height)
             .attr('width', width)
+
+        svg.selectAll('*').remove()
 
         const xScale = d3.scaleBand().range([paddingHorizontal, width-(paddingHorizontal/2)]).domain(feed.map(f => f[category]))
         const yScale = d3.scaleLinear().range([height-paddingVertical, paddingVertical]).domain([0, d3.max(feed.map(f => f[field]))])
@@ -77,7 +79,17 @@ export default function Graph({feed, category, field, title, graphColor, lineGra
 
     return (
         <Paper sx={{px: 2, py:2}}>
-            <Typography fontWeight={600}>{title}</Typography>
+            <Box display='flex' alignItems='center' justifyContent='space-between'>
+                <Typography textTransform='capitalize' fontWeight={600}>{title}</Typography>
+                {
+                    toggleVariation && 
+                        <Box>
+                            <Button variant={field==='views'?'contained':'text'} onClick={() => toggleVariation('views')} color='primary'>views</Button>
+                            <Button variant={field==='comments'?'contained':'text'} onClick={() => toggleVariation('comments')} color='warning'>comments</Button>
+                            <Button variant={field==='likes'?'contained':'text'} onClick={() => toggleVariation('likes')} color='success'>likes</Button>
+                        </Box>
+                }
+            </Box>
             <Box mt={2}>
                 <svg ref={svgRef}></svg>
             </Box>

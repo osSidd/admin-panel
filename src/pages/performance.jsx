@@ -3,10 +3,12 @@ import useFeedContext from '../hooks/useFeedContext'
 import ViewStatsCard from '../components/performance/viewStatsCard'
 import Graph from '../components/performance/graph'
 import FeedTable from '../components/feedTable'
+import { useState } from 'react'
 
 export default function Performance(){
 
     const {feed} = useFeedContext()
+
     const mostViewed = feed.toSorted((a,b) => b.views-a.views)
     const leastViewed = feed.toSorted((a,b) => a.views-b.views)
     const mostLiked = feed.toSorted((a, b) => b.likes - a.likes)
@@ -31,6 +33,19 @@ export default function Performance(){
         return categories
     }
 
+    function toggleVariation(factor){
+        switch(factor){
+            case 'comments':
+                setVariation({field: factor, feed: dateComments, graphColor:'#ffad5f'})
+                return
+            case 'likes':
+                setVariation({field: factor, feed: dateLikes, graphColor:'#28c765'})
+                return
+            default:
+                setVariation({field: 'views', feed: dateViews, graphColor:'#7367f0'})
+        }
+    }
+
     // function statusMetrics(feed){
     //     const statusObj = {published: 0, draft: 0}
     //     feed.forEach(f => {
@@ -44,6 +59,10 @@ export default function Performance(){
     const categoryLikes = getMetrics(feed, 'category', 'likes')
     const categoryComments = getMetrics(feed, 'category', 'comments')
     const dateViews = getMetrics(feed, 'createdAt', 'views')
+    const dateComments = getMetrics(feed, 'createdAt', 'comments')
+    const dateLikes = getMetrics(feed, 'createdAt', 'likes')
+
+    const [variation, setVariation] = useState({field: 'views', feed: dateViews, graphColor: '#7367f0'})
 
     return(
         <Box>
@@ -63,9 +82,6 @@ export default function Performance(){
                         col2Color='panelPrimary.main'
                     />
                 </Grid>
-                <Grid item lg={7}>
-                    <Graph feed={dateViews} category='category' field='views' title='Variation of Views'     graphColor='#7367f0' lineGraph={true}/>
-                </Grid>
                 <Grid item lg={4}>
                     <ViewStatsCard
                         title='Top 5 least viewed feeds'
@@ -77,6 +93,12 @@ export default function Performance(){
                         col2Item='views'
                         col2Color='error.light'
                     />
+                </Grid>
+                <Grid item lg={7}>
+                    <Graph feed={variation.feed} category='category' field={variation.field} title={`Variation of ${variation.field}`} graphColor={variation.graphColor} lineGraph={true} toggleVariation={toggleVariation}/>
+                </Grid>
+                <Grid item lg={5}>
+                    <Graph feed={categoryLikes} category='category' field='likes' title='Category vs Likes' graphColor='#28c765'/>
                 </Grid>
                 <Grid item lg={6}>
                     <ViewStatsCard
@@ -90,12 +112,6 @@ export default function Performance(){
                         col2Color='panelPrimary.main'
                     />
                 </Grid>
-                <Grid item lg={5}>
-                    <Graph feed={categoryLikes} category='category' field='likes' title='Category vs Likes' graphColor='#28c765'/>
-                </Grid>     
-                <Grid item lg={5}>
-                    <Graph feed={categoryComments} category='category' field='comments' title='Category vs Comments'    graphColor='#ffad5f'/>
-                </Grid>
                 <Grid item lg={6}>
                     <ViewStatsCard
                         title='High user engagement (comments)'
@@ -108,6 +124,9 @@ export default function Performance(){
                         col2Color='info.main'
                         width={350}
                     />
+                </Grid>
+                <Grid item lg={5}>
+                    <Graph feed={categoryComments} category='category' field='comments' title='Category vs Comments' graphColor='#ffad5f'/>
                 </Grid>
             </Grid>
             <FeedTable
