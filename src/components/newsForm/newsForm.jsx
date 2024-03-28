@@ -19,17 +19,17 @@ export default function NewsForm({feed}){
     const [feedForm, setFeedForm] = useState({
         title: feed? feed.title : '',
         category: feed ? feed.category : 'Politics',
-        multimedia: feed ? feed.multimedia : '',
+        multimedia: feed ? feed.multimedia : {url: '', type: ''},
     })
 
     function handleChange(e){
-        const {name, value} = e.target
+        const {name, value, files} = e.target
         setFeedForm(prev => ({
             ...prev,
-            [name]: value
+            [name]: name === 'multimedia' ? {url: URL.createObjectURL(files[0]), type: files[0].type} : value
         }))
     }
-
+    console.log(feedForm)
     function hasError(){
         if(!feedForm.title){
             setError(prev => ({content: '', title: 'title required'}))
@@ -121,6 +121,9 @@ export default function NewsForm({feed}){
                         variant="outlined"
                         type="file"
                         fullWidth
+                        name="multimedia"
+                        onChange={handleChange}
+                        // value={feedForm.multimedia}
                     />
                 </Box>
                 <TextField

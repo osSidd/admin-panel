@@ -1,16 +1,29 @@
-import { Box, Chip, Typography } from "@mui/material";
+import { Box, CardMedia, Chip, Typography } from "@mui/material";
 
 export default function Feed({feed, mobile=false}){
+    const mediaType = feed.multimedia?.type?.split('/')[0]
+    console.log(mediaType)
     return (
         <Box overflow='auto' sx={{maxWidth: mobile ? '88%' : '100%', pl: mobile ? 5 : 0, pr: mobile ? 1 : 0,  mr: mobile ? 5 : 0}} maxHeight='75vh'>
-            <Box
-                component='img'
-                src={feed.multimedia}
-                alt=""
-                width='100%'
-                height='auto'
-                sx={{display:'block', mx:mobile ? 0 :'auto'}}
-            />
+            { mediaType && (mediaType === 'image' ? 
+                <Box
+                    component='img'
+                    src={feed.multimedia.url}
+                    alt=""
+                    width='100%'
+                    height='auto'
+                    sx={{display:'block', mx:mobile ? 0 :'auto'}}
+                /> : 
+                <CardMedia
+                    src={feed.multimedia.url}
+                    component='video'
+                    controls
+                    width='100%'
+                    height='auto'
+                    muted
+                    autoPlay
+                />)
+            }
             <Typography fontSize={mobile ? 16 : 24} variant="h4" mt={2}>{feed.title}</Typography>
             <Chip color='info' sx={{mt:2}} label={feed.category}></Chip>
             <Typography mt={2}>{feed.createdAt}</Typography>
