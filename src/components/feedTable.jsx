@@ -45,7 +45,7 @@ export default function FeedTable({cols, actions}){
                         >
                             {
                                 cols.map((col, index) => (
-                                    <TableCell key={col} width={index === 0 && '40%'} align={index > 0 ? 'right' : 'left'}>{row[col]}</TableCell>
+                                    <TableCell key={col} width={index === 0 ? '40%' : '15%'} align={index > 0 ? 'right' : 'left'}>{row[col]}</TableCell>
                                 ))
                             }
                         <TableCell align="right">

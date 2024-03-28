@@ -67,10 +67,10 @@ export default function Performance(){
     return(
         <Box>
             <Grid mb={4} container columnGap={4} rowGap={4}>
-                <Grid item lg={5}>
+                <Grid item xs={12} sm={5}>
                     <Graph feed={categoryViews} category='category' field='views' title='Category vs Views'     graphColor='#7367f0'/>
                 </Grid>
-                <Grid item lg={6}>                    
+                <Grid item xs={12} sm={6}>                    
                     <ViewStatsCard
                         title='Top 5 most viewed feeds'
                         col1Title='Title'
@@ -82,7 +82,7 @@ export default function Performance(){
                         col2Color='panelPrimary.main'
                     />
                 </Grid>
-                <Grid item lg={4}>
+                <Grid item xs={12} sm={4}>
                     <ViewStatsCard
                         title='Top 5 least viewed feeds'
                         col1Title='Title'
@@ -94,13 +94,13 @@ export default function Performance(){
                         col2Color='error.light'
                     />
                 </Grid>
-                <Grid item lg={7}>
+                <Grid item xs={12} sm={7}>
                     <Graph feed={variation.feed} category='category' field={variation.field} title={`Variation of ${variation.field}`} graphColor={variation.graphColor} lineGraph={true} toggleVariation={toggleVariation}/>
                 </Grid>
-                <Grid item lg={5}>
+                <Grid item xs={12} sm={5}>
                     <Graph feed={categoryLikes} category='category' field='likes' title='Category vs Likes' graphColor='#28c765'/>
                 </Grid>
-                <Grid item lg={6}>
+                <Grid item xs={12} sm={6}>
                     <ViewStatsCard
                         title='Top 5 most liked feeds'
                         col1Title='Title'
@@ -112,7 +112,7 @@ export default function Performance(){
                         col2Color='panelPrimary.main'
                     />
                 </Grid>
-                <Grid item lg={6}>
+                <Grid item xs={12} sm={6}>
                     <ViewStatsCard
                         title='High user engagement (comments)'
                         col1Title='Title'
@@ -125,7 +125,7 @@ export default function Performance(){
                         width={350}
                     />
                 </Grid>
-                <Grid item lg={5}>
+                <Grid item xs={12} sm={5}>
                     <Graph feed={categoryComments} category='category' field='comments' title='Category vs Comments' graphColor='#ffad5f'/>
                 </Grid>
             </Grid>

@@ -1,15 +1,31 @@
 import { Box, Button, Paper, Typography } from '@mui/material'
 import * as d3 from 'd3'
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
+
 
 export default function Graph({feed, category, field, title, graphColor, lineGraph=false, toggleVariation=undefined}){
+    
     const svgRef = useRef()
+    const [screenWidth, setScreenWidth] = useState(768)
+
+    function resize(x){
+        if(x.matches) setScreenWidth(300)
+        else setScreenWidth(1024)
+    }
 
     function makeGraph(svgRef, feed, category, field){
-        const height = 300
-        const width = lineGraph ? 500 : 350
-        const paddingHorizontal = 50
+        const height = 238
+        const width = screenWidth <= 768 ? 300 : (lineGraph ? 500 : 350)
+        const paddingHorizontal = screenWidth <= 768 ? 40 : 50
         const paddingVertical = 25
+        const fontSize = screenWidth <= 768 ? '12px' : '16px'
+        
+        let x = window.matchMedia('(max-width:768px)')
+        
+        resize(x)
+        
+        x.addEventListener('change', () => {resize(x)})
+
         const svg = d3.select(svgRef.current)
         svg
             .attr('height', height)
@@ -32,7 +48,7 @@ export default function Graph({feed, category, field, title, graphColor, lineGra
             .style('display', 'none')
         xAxis.selectAll('text')
             .style('font-family', 'Roboto')
-            .style('font-size', '16px')
+            .style('font-size', fontSize)
             .style('color', '#777')
 
         const yAxis = svg.append('g')
@@ -44,7 +60,7 @@ export default function Graph({feed, category, field, title, graphColor, lineGra
             .style('stroke', '#dedede')
         yAxis.selectAll('text')
             .style('font-family', 'Roboto')
-            .style('font-size', '16px')
+            .style('font-size', fontSize)
             .style('color', '#777')
 
         const barContainer = svg.append('g')
@@ -75,7 +91,7 @@ export default function Graph({feed, category, field, title, graphColor, lineGra
 
     useEffect(() => {
         makeGraph(svgRef, feed, category, field)
-    }, [feed, category, field, svgRef])
+    }, [feed, category, field, svgRef, screenWidth])
 
     return (
         <Paper sx={{px: 2, py:2}}>
