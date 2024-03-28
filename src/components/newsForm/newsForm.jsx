@@ -123,7 +123,7 @@ export default function NewsForm({feed}){
                         fullWidth
                         name="multimedia"
                         onChange={handleChange}
-                        // value={feedForm.multimedia}
+                        inputProps={{accept: 'image/*, video/*'}}
                     />
                 </Box>
                 <TextField

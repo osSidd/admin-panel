@@ -10,6 +10,7 @@ export default [
         status:'Published',
         comments: [],
         views:255,
+        likes: 23,
     },
     {
         id: 1,
@@ -22,6 +23,7 @@ export default [
         status:'Draft',
         comments: [],
         views: 302,
+        likes: 21,
     },
     {
         id: 2,
@@ -34,6 +36,7 @@ export default [
         status:'Published',
         comments: [],
         views: 29,
+        likes: 55,
     },
     {
         id: 3,
@@ -46,6 +49,7 @@ export default [
         status:'Draft',
         comments: [],
         views: 2023,
+        likes: 661,
     },
     {
         id: 4,
@@ -58,6 +62,7 @@ export default [
         status:'Draft',
         comments: [],
         views: 99,
+        likes: 62,
     },
     {
         id: 5,
@@ -70,6 +75,7 @@ export default [
         status:'Draft',
         comments: [],
         views: 123,
+        likes: 12,
     },
     {
         id: 6,
@@ -82,6 +88,7 @@ export default [
         status:'Draft',
         comments: [],
         views: 992,
+        likes: 232
     },
     {
         id: 7,
@@ -94,5 +101,6 @@ export default [
         status:'Draft',
         comments: [],
         views: 1023,
+        likes: 231,
     }
 ]
