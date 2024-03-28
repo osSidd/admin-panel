@@ -2,12 +2,12 @@ import { Box, Paper, Typography } from '@mui/material'
 import * as d3 from 'd3'
 import { useEffect, useRef } from "react"
 
-export default function Graph({feed, category, field, title}){
+export default function Graph({feed, category, field, title, graphColor, lineGraph=false}){
     const svgRef = useRef()
 
     function makeGraph(svgRef, feed, category, field){
         const height = 300
-        const width = 350
+        const width = lineGraph ? 500 : 350
         const paddingHorizontal = 50
         const paddingVertical = 25
         const svg = d3.select(svgRef.current)
@@ -46,7 +46,7 @@ export default function Graph({feed, category, field, title}){
             .style('color', '#777')
 
         const barContainer = svg.append('g')
-        barContainer.selectAll('rect')
+        !lineGraph && barContainer.selectAll('rect')
                     .data(feed)
                     .enter()
                     .append('rect')
@@ -55,8 +55,20 @@ export default function Graph({feed, category, field, title}){
                     .attr('x', d => xScale(d[category]) + xScale.bandwidth()/4)
                     .attr('y', d => yScale(d[field]))
                     .attr('ry', 5)
-                    .attr('fill', '#7367f0')
+                    .attr('fill', graphColor)
                     .style('cursor', 'pointer')
+
+        const line = d3.line()
+                    .x(d => xScale(d[category])+xScale.bandwidth()/2)
+                    .y(d => yScale(d[field]))
+                    .curve(d3.curveBasis)
+    
+        const curve = lineGraph && svg.append('path')
+                            .datum(feed)
+                            .attr('d', line)
+                            .attr('fill', 'none')
+                            .attr('stroke', graphColor)
+                            .attr('stroke-width', 2)
     }
 
     useEffect(() => {
