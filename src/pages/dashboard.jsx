@@ -50,13 +50,13 @@ export default function Dashboard(){
     const feedCount = countFeed(feed)
 
     return (
-        <Box display='flex' alignItems='center' flexWrap='wrap' justifyContent='space-evenly'>
+        <Box display='flex' alignItems='center' flexWrap='wrap' justifyContent='space-evenly' rowGap={{xs:4, lg:0}}>
                         
             <PieChart feed={statusArr} title='Feed status'/>
 
             <Graph feed={feedCount} category='createdAt' field='feedCount' title='Date wise variation of feeds created' graphColor='#7367f0' lineGraph={true} lineCurve={false}/>
 
-            <Box width='100%' mt={4} display='flex' justifyContent='space-between' alignItems='center' flexWrap='wrap'>
+            <Box width='100%' mt={4} display='flex' justifyContent='space-between' alignItems='center' flexWrap='wrap' rowGap={{xs:4, lg:0}}>
                 <QuickLink title='Performance' link='/performance' img={performance}/>
                 <QuickLink title='Manage feeds' link='/news-feed/manage' img={manage}/>
                 <QuickLink title='Create feed' link='/news-feed/create' img={create}/>
