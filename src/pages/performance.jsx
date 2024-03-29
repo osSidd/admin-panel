@@ -2,7 +2,6 @@ import {Box, Grid} from '@mui/material'
 import useFeedContext from '../hooks/useFeedContext'
 import ViewStatsCard from '../components/performance/viewStatsCard'
 import Graph from '../components/performance/graph'
-import FeedTable from '../components/feedTable'
 import { useState } from 'react'
 
 export default function Performance(){
@@ -46,15 +45,6 @@ export default function Performance(){
         }
     }
 
-    // function statusMetrics(feed){
-    //     const statusObj = {published: 0, draft: 0}
-    //     feed.forEach(f => {
-    //         if(f.status === 'Draft') statusObj.draft += 1
-    //         else statusObj.published += 1
-    //     })
-    //     return statusObj
-    // }
-
     const categoryViews = getMetrics(feed, 'category', 'views')
     const categoryLikes = getMetrics(feed, 'category', 'likes')
     const categoryComments = getMetrics(feed, 'category', 'comments')
@@ -66,7 +56,7 @@ export default function Performance(){
 
     return(
         <Box>
-            <Grid mb={4} container columnGap={4} rowGap={4}>
+            <Grid mb={4} justifyContent='center' container columnGap={4} rowGap={4}>
                 <Grid item xs={12} sm={5}>
                     <Graph feed={categoryViews} category='category' field='views' title='Category vs Views'     graphColor='#7367f0'/>
                 </Grid>
@@ -129,10 +119,6 @@ export default function Performance(){
                     <Graph feed={categoryComments} category='category' field='comments' title='Category vs Comments' graphColor='#ffad5f'/>
                 </Grid>
             </Grid>
-            <FeedTable
-                cols={['title', 'category', 'createdAt', 'views', 'likes', 'comments']}
-                actions={{view: true, edit:false, delete: false}}
-            />
         </Box>
     )
 }

@@ -3,7 +3,7 @@ import * as d3 from 'd3'
 import { useEffect, useRef, useState } from "react"
 
 
-export default function Graph({feed, category, field, title, graphColor, lineGraph=false, toggleVariation=undefined}){
+export default function Graph({feed, category, field, title, graphColor, lineGraph=false, lineCurve=true, toggleVariation=undefined}){
     
     const svgRef = useRef()
     const [screenWidth, setScreenWidth] = useState(768)
@@ -75,18 +75,18 @@ export default function Graph({feed, category, field, title, graphColor, lineGra
                     .attr('ry', 5)
                     .attr('fill', graphColor)
                     .style('cursor', 'pointer')
-
+        
         const line = d3.line()
                     .x(d => xScale(d[category])+xScale.bandwidth()/2)
                     .y(d => yScale(d[field]))
-                    .curve(d3.curveBasis)
+        lineCurve && line.curve(d3.curveBasis)
     
         const curve = lineGraph && svg.append('path')
                             .datum(feed)
                             .attr('d', line)
                             .attr('fill', 'none')
                             .attr('stroke', graphColor)
-                            .attr('stroke-width', 2)
+                            .attr('stroke-width', 2)        
     }
 
     useEffect(() => {
