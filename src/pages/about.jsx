@@ -1,8 +1,8 @@
-import {Box, Link, List, ListItem, ListItemText, Typography} from '@mui/material'
+import {Box, List, ListItem, ListItemText, Typography} from '@mui/material'
 
 export default function About(){
     return(
-        <Box>
+        <Box> 
             <Typography variant='h4' component='h1' color='panelPrimary.main'>Admin panel</Typography>
             <Typography mt={2}>A web app demonstrating a simple admin panel ui for short news app - News2day</Typography>
             <Typography mt={4} component='h2' variant='h5'>Technologies used</Typography>

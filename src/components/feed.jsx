@@ -3,7 +3,7 @@ import { Box, CardMedia, Chip, Typography } from "@mui/material";
 export default function Feed({feed, mobile=false}){
     const mediaType = feed.multimedia?.type?.split('/')[0]
     return (
-        <Box overflow='auto' sx={{maxWidth: mobile ? '88%' : '100%', pl: mobile ? 5 : 0, pr: mobile ? 1 : 0,  mr: mobile ? 5 : 0}} maxHeight='75vh'>
+        <Box overflow='auto' sx={{maxWidth: mobile ? '88%' : '100%', pl: mobile ? 5 : 0, pr: mobile ? 1 : 0,  mr: mobile ? 5 : 0, height: mobile ? 500 : 500}}>
             { mediaType && (mediaType === 'image' ? 
                 <Box
                     component='img'

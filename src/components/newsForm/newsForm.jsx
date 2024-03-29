@@ -29,7 +29,7 @@ export default function NewsForm({feed}){
             [name]: name === 'multimedia' ? {url: URL.createObjectURL(files[0]), type: files[0].type} : value
         }))
     }
-    console.log(feedForm)
+
     function hasError(){
         if(!feedForm.title){
             setError(prev => ({content: '', title: 'title required'}))
@@ -144,18 +144,19 @@ export default function NewsForm({feed}){
                     <Button onClick={() => setDisplayMobile(true)} color='panelPrimary' sx={{ml:'auto'}}>Mobile preview</Button>
                 </Box>
             </Box>
-            <Box zIndex={5} display={displayMobile ? 'block': 'none'} width='fit-content' position='absolute' top={25} right={{xs:25, lg:125}}>
+            <Box zIndex={5} display={displayMobile ? 'block': 'none'} width='fit-content' position='absolute' top={25} right={{xs:25, lg:125}} overflow='hidden'>
                 <Box position='relative'>
                     <Box
                         component='img'
                         src={phone}
                         width={{xs:320, lg:375}}
                         bgcolor='white'
+                        zIndex={6}
                     />
-                    <Box position='absolute' top={75}>
+                    <Box position='absolute' top={{xs: 65, lg:75}} zIndex={1}>
                         <Feed mobile={true} feed={mobileFeed}/>    
                     </Box>
-                    <CloseIcon onClick={() => setDisplayMobile(false)} sx={{fontSize:32, position:'absolute', bottom:70, right:{xs:135, lg:100}, cursor:'pointer'}}/>
+                    <CloseIcon onClick={() => setDisplayMobile(false)} sx={{fontSize:32, bgcolor:'white', borderRadius:'50%',p:1, position:'absolute', bottom:70, right:{xs:135, lg:155}, cursor:'pointer', zIndex:7}}/>
                 </Box>
             </Box>
         </Box>

@@ -18,6 +18,7 @@ const Error = lazy(() => import('./pages/error'))
 
 import SideBar from './components/sidebar/sidebar';
 import AdminBar from './components/adminbar/adminBar';
+import Loading from './components/loading';
 
 function App() {
 
@@ -34,7 +35,7 @@ function App() {
         <Box width={{xs:'100%', lg:'78%'}} ml='auto' py={4}>
         <Box px={4}>
           <AdminBar toggleSideBar={toggleSideBar} displaySideBar={displaySideBar}/>
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<Loading/>}>
             <Routes>
               <Route path='/' element={<Dashboard/>}/>
               <Route path='/news-feed'>
