@@ -1,10 +1,11 @@
+import video from '../assets/video.mp4'
 export default [
     {
         id: 0,
         title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, voluptates?',
         category: 'Politics',
         content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero dolorem incidunt quam iusto laborum, ratione aliquam ea dicta, itaque aliquid quisquam doloremque voluptas possimus earum vel debitis. Excepturi commodi similique pariatur magnam unde autem hic officiis eveniet dicta repellendus, fugiat nobis delectus explicabo rerum recusandae error nemo perspiciatis iure provident, magni ipsa. In sit nesciunt sint impedit, culpa harum nobis. Ratione commodi vero tenetur nam totam sunt vitae accusantium, provident ipsam magnam minus nemo fuga molestias. Odit sequi sint libero vero at ipsa, ut laborum modi, excepturi recusandae, reiciendis blanditiis officia aspernatur aperiam cum maiores deserunt voluptatem placeat. Aspernatur, repellendus!',
-        multimedia: {url: 'https://images.unsplash.com/photo-1497008386681-a7941f08011e?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', type: 'image/jpg'},
+        multimedia: {url: video, type: 'video/mp4'},
         author: '',
         createdAt: '25/3/2024',
         status:'Published',
@@ -30,7 +31,7 @@ export default [
         title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, voluptates?',
         category: 'Politics',
         content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero dolorem incidunt quam iusto laborum, ratione aliquam ea dicta, itaque aliquid quisquam doloremque voluptas possimus earum vel debitis. Excepturi commodi similique pariatur magnam unde autem hic officiis eveniet dicta repellendus, fugiat nobis delectus explicabo rerum recusandae error nemo perspiciatis iure provident, magni ipsa. In sit nesciunt sint impedit, culpa harum nobis. Ratione commodi vero tenetur nam totam sunt vitae accusantium, provident ipsam magnam minus nemo fuga molestias. Odit sequi sint libero vero at ipsa, ut laborum modi, excepturi recusandae, reiciendis blanditiis officia aspernatur aperiam cum maiores deserunt voluptatem placeat. Aspernatur, repellendus!',
-        multimedia: {type: 'https://cdn.pixabay.com/photo/2013/07/12/17/43/newspaper-152320_1280.png', type:'image/jpg'},
+        multimedia: {url: 'https://cdn.pixabay.com/photo/2013/07/12/17/43/newspaper-152320_1280.png', type:'image/jpg'},
         author: '',
         createdAt: '26/3/2024',
         status:'Published',
@@ -56,7 +57,7 @@ export default [
         title: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, voluptates?',
         category: 'Sports',
         content: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Libero dolorem incidunt quam iusto laborum, ratione aliquam ea dicta, itaque aliquid quisquam doloremque voluptas possimus earum vel debitis. Excepturi commodi similique pariatur magnam unde autem hic officiis eveniet dicta repellendus, fugiat nobis delectus explicabo rerum recusandae error nemo perspiciatis iure provident, magni ipsa. In sit nesciunt sint impedit, culpa harum nobis. Ratione commodi vero tenetur nam totam sunt vitae accusantium, provident ipsam magnam minus nemo fuga molestias. Odit sequi sint libero vero at ipsa, ut laborum modi, excepturi recusandae, reiciendis blanditiis officia aspernatur aperiam cum maiores deserunt voluptatem placeat. Aspernatur, repellendus!',
-        multimedia: {url: 'https://images.pexels.com/photos/1369476/pexels-photo-1369476.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', type:'image/url'},
+        multimedia: {url: 'https://images.pexels.com/photos/1369476/pexels-photo-1369476.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', type:'image/jpg'},
         author: '',
         createdAt: '27/3/2024',
         status:'Published',
