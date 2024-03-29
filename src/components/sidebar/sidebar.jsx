@@ -7,6 +7,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import SpeedIcon from '@mui/icons-material/Speed';
 import CloseIcon from '@mui/icons-material/Close';
+import InfoIcon from '@mui/icons-material/Info';
 
 export default function SideBar({toggleSideBar, displaySideBar}){
 
@@ -42,7 +43,12 @@ export default function SideBar({toggleSideBar, displaySideBar}){
                         <span>Performance</span>
                     </NavLink>
                 </Box>
-
+                <Box display='flex' mt={2}>
+                    <NavLink className='nav-link' to='/about'>
+                        <InfoIcon sx={{mr:2}}/>
+                        <span>About</span>
+                    </NavLink>
+                </Box>
             </Box>
         </Box>
     )

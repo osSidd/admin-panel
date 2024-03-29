@@ -13,6 +13,7 @@ const FeedForm = lazy(() => import('./pages/newsFeedForm'))
 const EditFeed = lazy(() => import('./pages/editNewsFeed'))
 const ManageFeed = lazy(() => import('./pages/newsFeed'))
 const Performance = lazy(() => import('./pages/performance'))
+const About = lazy(() => import('./pages/about'))
 const Error = lazy(() => import('./pages/error'))
 
 import SideBar from './components/sidebar/sidebar';
@@ -41,6 +42,7 @@ function App() {
                 <Route path='edit' element={<EditFeed/>} />
                 <Route path='manage' element={<ManageFeed/>}/>
               </Route>
+              <Route path='/about' element={<About/>}/>
               <Route path='/performance' element={<Performance/>}/>
               <Route path='*' element={<Error/>} />
             </Routes>
